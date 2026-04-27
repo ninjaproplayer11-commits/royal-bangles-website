@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --luxury-black: #0A0A0A;
+  --gold: #D4AF37;
+  --gold-light: #F1D279;
+  --gold-dark: #996515;
+  --white: #FFFFFF;
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --soft-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+@layer base {
+  body {
+    @apply bg-luxury-black text-white font-poppins selection:bg-gold selection:text-luxury-black;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--soft-shadow);
+    @apply backdrop-blur-xl rounded-[2.5rem];
+  }
+  
+  .gold-glow {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    @apply hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] transition-all duration-500;
+  }
+
+  .text-shadow-gold {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+
+  .nav-link-hover {
+    @apply relative overflow-hidden;
+  }
+  
+  .nav-link-hover::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-500 ease-out;
+  }
+  
+  .nav-link-hover:hover::after {
+    @apply w-full;
+  }
+
+  .premium-input {
+    @apply w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm outline-none focus:border-gold/50 transition-all duration-300;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--luxury-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Luxury Animations */
+@keyframes gold-shine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-gold-shine {
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: gold-shine 3s infinite linear;
+}
+
+.img-zoom {
+  @apply overflow-hidden rounded-[2.5rem];
+}
+
+.img-zoom img {
+  @apply transition-transform duration-[1.5s] ease-out;
+}
+
+.img-zoom:hover img {
+  @apply scale-110;
+}
