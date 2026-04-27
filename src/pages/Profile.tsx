@@ -10,7 +10,7 @@ import ReferralWidget from '../components/ReferralWidget';
 import { generateInvoice } from '../utils/invoiceGenerator';
 
 const Profile: React.FC = () => {
-  const { currentUser, logout, wishlist, orders, addresses, addAddress, deleteAddress, products, updateOrderStatus, toggleWishlist, addToCart, shareWishlist, loyaltyPoints } = useShop();
+  const { currentUser, logout, wishlist, orders, addresses, addAddress, deleteAddress, products, updateOrderStatus, toggleWishlist, addToCart, shareWishlist } = useShop();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(window.location.search);
   const initialTab = searchParams.get('tab') || 'overview';

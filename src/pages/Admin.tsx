@@ -8,7 +8,7 @@ import { db } from '../lib/firebase';
 import { generateInvoice } from '../utils/invoiceGenerator';
 
 const Admin: React.FC = () => {
-  const { products, categories, refreshProducts, addCategory, deleteCategory, adminUser, logout, coupons, addCoupon, deleteCoupon, updateOrderStatus, seedDatabase, storeSettings, taxSettings, flashSale, saveStoreSettings, saveTaxSettings, saveFlashSale, bulkDeleteProducts, bulkUpdateProducts, toggleFeaturedProduct, getAllReviews, deleteReview } = useShop();
+  const { products, categories, refreshProducts, addCategory, deleteCategory, adminUser, logout, coupons, addCoupon, deleteCoupon, updateOrderStatus, seedDatabase, storeSettings, taxSettings, flashSale, saveStoreSettings, saveTaxSettings, saveFlashSale, bulkDeleteProducts, bulkUpdateProducts, toggleFeaturedProduct, deleteReview } = useShop();
   const [activeTab, setActiveTab] = useState<'list'|'orders'|'analytics'|'coupons'|'categories'|'newsletter'|'form'|'customers'|'settings'|'flashsale'|'returns'|'reviews'>('list');
   const [isEditing, setIsEditing] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});

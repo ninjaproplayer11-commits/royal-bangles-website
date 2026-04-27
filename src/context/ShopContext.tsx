@@ -23,6 +23,7 @@ export interface Product {
   tags?: string[];
   taxCategory?: string;
   stockBySize?: Record<string, number>;
+  showInGallery?: boolean;
 }
 
 export interface Review {
