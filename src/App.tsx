@@ -29,6 +29,16 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return (currentUser || adminUser || isAdminLoggedIn) ? <>{children}</> : <Navigate to="/auth" />;
 };
 
+const DevelopmentBanner = () => (
+  <div className="bg-black/90 backdrop-blur-xl border-b border-gold/10 py-3 text-center z-[2000] relative">
+    <p className="text-gold/90 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-4 px-6">
+      <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse shadow-[0_0_8px_#d4af37]" />
+      Website Under Development • Online Ordering is Coming Soon • Made by Adarsh
+      <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse shadow-[0_0_8px_#d4af37]" />
+    </p>
+  </div>
+);
+
 const AppInner: React.FC = () => {
   const { flashSale, storeSettings } = useShop();
   
@@ -42,6 +52,7 @@ const AppInner: React.FC = () => {
   const showSale = flashSale?.active && flashSale?.endTime && new Date(flashSale.endTime) > new Date();
   return (
     <div className="min-h-screen bg-luxury-black">
+      <DevelopmentBanner />
       {showSale && <FlashSaleBanner discount={flashSale.discount} label={flashSale.label} endTime={new Date(flashSale.endTime)} />}
       <CursorGlow />
       <LuxuryNavbar />
