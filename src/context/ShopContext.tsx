@@ -75,7 +75,7 @@ interface ShopContextType {
   coupons: any[];
   percentageDiscount: number;
   fixedDiscount: number;
-  updateOrderStatus: (orderId: string, status: string) => Promise<void>;
+  updateOrderStatus: (orderId: string, status: string, reason?: string) => Promise<void>;
   seedDatabase: () => Promise<void>;
   addReview: (review: Omit<Review, 'id' | 'createdAt'>) => Promise<void>;
   getProductReviews: (productId: string) => Promise<Review[]>;
