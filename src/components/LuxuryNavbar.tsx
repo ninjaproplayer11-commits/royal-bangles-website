@@ -169,6 +169,16 @@ const LuxuryNavbar: React.FC = () => {
             )}
           </Link>
 
+          {localStorage.getItem('royal_bangles_admin_auth') === 'true' && (
+            <Link to="/admin">
+              <button className="hidden md:flex items-center gap-2 bg-gold/10 border border-gold/30 px-5 py-3 rounded-full hover:bg-gold hover:text-luxury-black transition-all group">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-gold group-hover:text-luxury-black">
+                  Store Manager
+                </span>
+              </button>
+            </Link>
+          )}
+
           <Link to={currentUser ? "/profile" : "/auth"}>
             <button className="hidden sm:flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full hover:bg-white/10 hover:border-gold/30 transition-all group">
               <svg className="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>

@@ -736,8 +736,6 @@ const Admin: React.FC = () => {
                     { key: 'address', label: 'Address', placeholder: 'City, State' },
                     { key: 'instagram', label: 'Instagram URL', placeholder: 'https://instagram.com/...' },
                     { key: 'facebook', label: 'Facebook URL', placeholder: 'https://facebook.com/...' },
-                    { key: 'pinterest', label: 'Pinterest URL', placeholder: 'https://pinterest.com/...' },
-                    { key: 'twitter', label: 'Twitter URL', placeholder: 'https://twitter.com/...' },
                     { key: 'whatsapp', label: 'WhatsApp Number', placeholder: '919999999999' },
                   ].map(({ key, label, placeholder }) => (
                     <div key={key}>
@@ -746,34 +744,11 @@ const Admin: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                <div>
-                  <label className="text-[9px] text-white/30 uppercase tracking-widest block mb-2">Logo URL</label>
-                  <input type="text" value={localSettings.logo || ''} onChange={e => setLocalSettings(s => ({ ...s, logo: e.target.value }))} placeholder="https://..." className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 text-sm outline-none focus:border-gold/40 transition-all" />
-                </div>
                 <button onClick={async () => { setLoading(true); await saveStoreSettings(localSettings); setLoading(false); alert('Store settings saved! ✅'); }} disabled={loading} className="bg-gold text-luxury-black px-10 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest disabled:opacity-50 hover:bg-gold-light transition-all">
                   {loading ? 'Saving...' : 'Save Store Settings'}
                 </button>
               </div>
 
-              {/* Tax Settings */}
-              <div className="bg-[#111] p-12 rounded-[3rem] border border-white/10 space-y-8">
-                <h2 className="text-2xl font-playfair font-bold text-gold italic">GST / Tax Settings</h2>
-                <p className="text-white/30 text-sm">Set GST % per category. Leave 0 for tax-free.</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {categories.map(cat => (
-                    <div key={cat} className="flex items-center gap-4">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-white/50 w-32 flex-shrink-0">{cat}</label>
-                      <div className="flex items-center gap-2 flex-1">
-                        <input type="number" value={localTax[cat] || 0} onChange={e => setLocalTax(t => ({ ...t, [cat]: Number(e.target.value) }))} min={0} max={28} className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-gold/40 transition-all" />
-                        <span className="text-white/30 text-sm font-bold">%</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <button onClick={async () => { setLoading(true); await saveTaxSettings(localTax); setLoading(false); alert('Tax settings saved! ✅'); }} disabled={loading} className="bg-gold text-luxury-black px-10 py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest disabled:opacity-50 hover:bg-gold-light transition-all">
-                  {loading ? 'Saving...' : 'Save Tax Settings'}
-                </button>
-              </div>
             </motion.div>
 
           ) : activeTab === 'newsletter' ? (

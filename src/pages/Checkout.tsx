@@ -5,6 +5,7 @@ import { useShop } from '../context/ShopContext';
 import PremiumButton from '../components/PremiumButton';
 import PremiumFooter from '../components/PremiumFooter';
 import GiftWrapOption from '../components/GiftWrapOption';
+import ErrorModal from '../components/ErrorModal';
 
 const Checkout: React.FC = () => {
   const { cart, products, addresses, placeOrder, currentUser, percentageDiscount, fixedDiscount } = useShop();
@@ -16,6 +17,8 @@ const Checkout: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [giftWrap, setGiftWrap] = useState(false);
   const [giftMessage, setGiftMessage] = useState('');
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const cartItems = cart.map(item => {
@@ -116,8 +119,8 @@ const Checkout: React.FC = () => {
       navigate(`/order-success?id=${orderId}`);
     } catch (e: any) {
       console.error("Order Error:", e);
-      const errorMsg = e.description || e.message || "An unexpected error occurred during checkout.";
-      alert(`⚠️ Checkout Issue: ${errorMsg}`);
+      setErrorMessage("Your payment didn't go through due to a temporary issue. Any debited amount will be refunded in 4-5 business days.");
+      setShowError(true);
     } finally {
       setIsProcessing(false);
     }
@@ -291,6 +294,12 @@ const Checkout: React.FC = () => {
         </div>
       </div>
       <PremiumFooter />
+      <ErrorModal 
+        isOpen={showError} 
+        onClose={() => setShowError(false)} 
+        title="Checkout Issue" 
+        message={errorMessage} 
+      />
     </div>
   );
 };
