@@ -22,8 +22,13 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-playfair;
   }
 }
@@ -35,10 +40,10 @@
     box-shadow: var(--soft-shadow);
     @apply backdrop-blur-xl rounded-[2.5rem];
   }
-  
+
   .gold-glow {
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
-    @apply hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] transition-all duration-500;
+    @apply hover:shadow-[0_0_40px_rgba(212, 175, 55, 0.3)] transition-all duration-500;
   }
 
   .text-shadow-gold {
@@ -48,12 +53,12 @@
   .nav-link-hover {
     @apply relative overflow-hidden;
   }
-  
+
   .nav-link-hover::after {
     content: '';
     @apply absolute bottom-0 left-0 w-0 h-[1px] bg-gold transition-all duration-500 ease-out;
   }
-  
+
   .nav-link-hover:hover::after {
     @apply w-full;
   }
@@ -83,8 +88,13 @@
 
 /* Luxury Animations */
 @keyframes gold-shine {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
 .animate-gold-shine {

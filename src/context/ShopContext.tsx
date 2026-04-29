@@ -538,9 +538,26 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const googleLogin = async () => {
-    const { GoogleAuthProvider, signInWithPopup } = await import('firebase/auth');
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    try {
+      const { GoogleAuthProvider, signInWithPopup, setPersistence, browserLocalPersistence } = await import('firebase/auth');
+      await setPersistence(auth, browserLocalPersistence);
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
+      const result = await signInWithPopup(auth, provider);
+      return !!result.user;
+    } catch (error: any) {
+      console.error("Google Login Error:", error);
+      if (error.code === 'auth/popup-blocked') {
+        alert("🚫 Popup Blocked: Please allow popups for this website to sign in with Google.");
+      } else if (error.code === 'auth/unauthorized-domain') {
+        alert("🚫 Domain Not Authorized: Please add '" + window.location.hostname + "' to 'Authorized Domains' in your Firebase Console (Authentication > Settings).");
+      } else if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
+        // User closed the popup, no need for alert
+      } else {
+        alert("Login Error: " + (error.message || "Failed to connect to Google"));
+      }
+      return false;
+    }
   };
 
   const addReview = async (review: Omit<Review, 'id' | 'createdAt'>) => {
