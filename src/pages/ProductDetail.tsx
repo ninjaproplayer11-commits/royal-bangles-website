@@ -224,7 +224,13 @@ const ProductDetail: React.FC = () => {
                     {notifyMsg && <p className="text-green-500 text-[10px] font-bold uppercase tracking-widest text-center">{notifyMsg}</p>}
                   </div>
                 ) : (
-                  <PremiumButton onClick={() => addToCart(product.id, selectedSize)} variant="primary" className="flex-1 py-6 text-sm">Add to Private Collection</PremiumButton>
+                  <PremiumButton onClick={() => {
+                    if (!currentUser) {
+                      navigate('/auth');
+                      return;
+                    }
+                    addToCart(product.id, selectedSize);
+                  }} variant="primary" className="flex-1 py-6 text-sm">Add to Private Collection</PremiumButton>
                 )}
                 <button 
                   onClick={() => toggleWishlist(product.id)}
@@ -326,16 +332,28 @@ const ProductDetail: React.FC = () => {
 
       </div>
 
-      {/* Mobile Sticky Acquisition Bar */}
       <div className="lg:hidden fixed bottom-0 left-0 w-full bg-luxury-black/60 backdrop-blur-3xl border-t border-white/5 p-6 z-[90] flex gap-4 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
         <button 
-          onClick={() => { addToCart(product.id); navigate('/cart'); }}
+          onClick={() => { 
+            if (!currentUser) {
+              navigate('/auth');
+              return;
+            }
+            addToCart(product.id); 
+            navigate('/cart'); 
+          }}
           className="flex-1 bg-gold text-luxury-black py-4 rounded-2xl text-[10px] font-bold uppercase tracking-widest shadow-xl shadow-gold/20"
         >
           Buy Now
         </button>
         <button 
-          onClick={() => addToCart(product.id)}
+          onClick={() => {
+            if (!currentUser) {
+              navigate('/auth');
+              return;
+            }
+            addToCart(product.id);
+          }}
           className="p-4 bg-white/5 border border-white/10 rounded-2xl text-gold"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>

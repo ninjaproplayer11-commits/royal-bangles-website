@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useShop, Product } from '../context/ShopContext';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
-  const { addToCart, toggleWishlist, isInWishlist } = useShop();
+  const { addToCart, toggleWishlist, isInWishlist, currentUser } = useShop();
   const navigate = useNavigate();
   
   if (!product) return null;
@@ -88,6 +88,10 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               whileTap={{ scale: 0.98 }}
               onClick={(e) => {
                 e.preventDefault();
+                if (!currentUser) {
+                  navigate('/auth');
+                  return;
+                }
                 addToCart(id, product.sizes?.[0]);
               }}
               className="bg-gold text-luxury-black py-4 rounded-2xl text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl shadow-gold/20 hover:bg-gold-light transition-colors"
@@ -99,6 +103,10 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               whileTap={{ scale: 0.98 }}
               onClick={(e) => {
                 e.preventDefault();
+                if (!currentUser) {
+                  navigate('/auth');
+                  return;
+                }
                 addToCart(id, product.sizes?.[0]);
                 navigate('/checkout');
               }}

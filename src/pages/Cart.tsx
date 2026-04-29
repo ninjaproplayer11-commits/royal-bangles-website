@@ -6,7 +6,7 @@ import PremiumButton from '../components/PremiumButton';
 import PremiumFooter from '../components/PremiumFooter';
 
 const Cart: React.FC = () => {
-  const { cart, removeFromCart, updateQuantity, products, toggleWishlist, wishlist, applyCoupon, percentageDiscount, fixedDiscount, isLoading } = useShop();
+  const { cart, removeFromCart, updateQuantity, products, toggleWishlist, wishlist, applyCoupon, percentageDiscount, fixedDiscount, isLoading, currentUser } = useShop();
   const [couponCode, setCouponCode] = useState('');
   const [couponStatus, setCouponStatus] = useState<{success: boolean, message: string} | null>(null);
   const navigate = useNavigate();
@@ -201,9 +201,19 @@ const Cart: React.FC = () => {
                     <span className="text-5xl font-playfair font-bold text-gold text-shadow-gold">₹{total}</span>
                   </div>
 
-                  <Link to="/checkout">
-                    <PremiumButton variant="primary" className="w-full py-8 text-sm shadow-2xl shadow-gold/20">Proceed to Private Checkout</PremiumButton>
-                  </Link>
+                  <PremiumButton 
+                    onClick={() => {
+                      if (!currentUser) {
+                        navigate('/auth');
+                      } else {
+                        navigate('/checkout');
+                      }
+                    }} 
+                    variant="primary" 
+                    className="w-full py-8 text-sm shadow-2xl shadow-gold/20"
+                  >
+                    Proceed to Private Checkout
+                  </PremiumButton>
 
                   <div className="mt-10 flex items-center justify-center gap-6 opacity-30">
                     <span className="text-[10px] font-bold uppercase tracking-widest">Secure Payments</span>

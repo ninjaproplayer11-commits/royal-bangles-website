@@ -8,7 +8,7 @@ import { db } from '../lib/firebase';
 import { generateInvoice } from '../utils/invoiceGenerator';
 
 const Admin: React.FC = () => {
-  const { products, categories, refreshProducts, addCategory, deleteCategory, adminUser, logout, coupons, addCoupon, deleteCoupon, updateOrderStatus, seedDatabase, storeSettings, taxSettings, flashSale, saveStoreSettings, saveTaxSettings, saveFlashSale, bulkDeleteProducts, bulkUpdateProducts, toggleFeaturedProduct, deleteReview } = useShop();
+  const { products, categories, refreshProducts, addCategory, deleteCategory, adminUser, logout, coupons, addCoupon, deleteCoupon, updateOrderStatus, storeSettings, taxSettings, flashSale, saveStoreSettings, saveTaxSettings, saveFlashSale, bulkDeleteProducts, bulkUpdateProducts, toggleFeaturedProduct, deleteReview } = useShop();
   const [activeTab, setActiveTab] = useState<'list'|'orders'|'analytics'|'coupons'|'categories'|'newsletter'|'form'|'customers'|'settings'|'flashsale'|'returns'|'reviews'>('list');
   const [isEditing, setIsEditing] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
@@ -244,7 +244,6 @@ const Admin: React.FC = () => {
               <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
                 <input type="text" placeholder="Filter inventory..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="flex-1 bg-[#111] border border-white/10 rounded-2xl px-8 py-5 text-sm outline-none focus:border-gold/30 transition-all" />
                 <div className="flex gap-4 flex-wrap justify-center">
-                  <button onClick={() => { if(window.confirm('Populate shop with 12 Sample Luxury Masterpieces?')) seedDatabase(); }} className="bg-gold/10 border border-gold/30 text-gold px-6 py-4 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-luxury-black transition-all">🏰 Seed</button>
                   <button onClick={deleteAllProducts} className="bg-red-500/10 border border-red-500/30 text-red-500 px-6 py-4 rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all">🌪️ Clear All</button>
                 </div>
               </div>

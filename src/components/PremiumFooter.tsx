@@ -84,12 +84,6 @@ const PremiumFooter: React.FC = () => {
           <div>
             <h4 className="text-gold font-playfair font-bold text-lg mb-8">Client Care</h4>
             <ul className="space-y-4">
-              <li className="pb-4 border-b border-white/5">
-                <Link to="/auth" className="text-gold/50 hover:text-gold transition-colors text-[10px] uppercase tracking-[0.3em] font-bold flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-gold animate-pulse"></span>
-                  Account Login
-                </Link>
-              </li>
               {[
                 { name: 'Shipping Policy', slug: 'shipping-policy' },
                 { name: 'Returns & Exchange', slug: 'returns-exchange' },
@@ -141,6 +135,7 @@ const PremiumFooter: React.FC = () => {
           <div className="flex gap-8 text-white/30 text-[10px] uppercase tracking-widest font-bold">
             <Link to="/privacy" className="hover:text-gold transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-gold transition-colors">Terms of Service</Link>
+            <Link to="/login" className="hover:text-gold transition-colors opacity-20 hover:opacity-100">Staff Portal</Link>
           </div>
         </div>
       </div>

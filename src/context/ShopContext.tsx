@@ -76,7 +76,6 @@ interface ShopContextType {
   percentageDiscount: number;
   fixedDiscount: number;
   updateOrderStatus: (orderId: string, status: string, reason?: string) => Promise<void>;
-  seedDatabase: () => Promise<void>;
   addReview: (review: Omit<Review, 'id' | 'createdAt'>) => Promise<void>;
   getProductReviews: (productId: string) => Promise<Review[]>;
   getAllReviews: () => Promise<Review[]>;
@@ -280,6 +279,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const addToCart = (id: string, size?: string) => {
+    if (!currentUser) return;
     const stringId = String(id);
     setCart(prev => {
       const existing = prev.find(item => String(item.id) === stringId && item.size === size);
@@ -665,47 +665,6 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await loadStoreData();
   };
 
-  const seedDatabase = async () => {    const sampleProducts = [
-      { name: "Royal Polki Bridal Choker", price: 45000, category: "Bridal", description: "A magnificent handcrafted 22K gold choker featuring traditional Polki diamonds and ruby droplets. Perfect for the modern queen.", image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80", stock: 5, isNew: true, sizes: ["Standard"] },
-      { name: "Temple Heritage Gold Bangles", price: 12500, category: "Heritage", description: "Hand-carved temple jewelry bangles featuring Goddess Lakshmi motifs. A timeless piece of Indian heritage.", image: "https://images.unsplash.com/photo-1611085583191-a3b13b94b421?auto=format&fit=crop&q=80", stock: 12, sizes: ["2.4", "2.6", "2.8"] },
-      { name: "Diamond Kada Masterpiece", price: 85000, category: "Luxury", description: "Solid gold Kada encrusted with VVS quality diamonds. The ultimate statement of luxury and status.", image: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&q=80", stock: 3, isBestSeller: true, sizes: ["2.4", "2.6"] },
-      { name: "Minimalist Gold Band", price: 4500, category: "Casual", description: "A sleek, everyday 18K gold band with a high-polish finish. Elegance in simplicity.", image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80", stock: 25, sizes: ["12", "14", "16"] },
-      { name: "Kids Pearl & Gold Bracelet", price: 2500, category: "Kids", description: "Delicate and safe freshwater pearls on a 14K gold chain. Designed specifically for little hands.", image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80", stock: 15, sizes: ["Kids Adjustable"] },
-      { name: "Antique Lakshmi Jhumkas", price: 8900, category: "Heritage", description: "Traditional South Indian bell-shaped earrings with an antique matte finish and tiny pearl hangings.", image: "https://images.unsplash.com/photo-1590548784585-643d2b9f291a?auto=format&fit=crop&q=80", stock: 8, sizes: ["One Size"] },
-      { name: "Ruby Statement Bridal Set", price: 120000, category: "Bridal", description: "An elite bridal set featuring Burmese rubies and uncut diamonds. Includes necklace, earrings, and maang tikka.", image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80", stock: 2, isNew: true },
-      { name: "Rose Gold Modern Kada", price: 15000, category: "Luxury", description: "A contemporary take on the traditional Kada, crafted in stunning 18K rose gold with a geometric design.", image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80", stock: 10, sizes: ["2.4", "2.6"] },
-      { name: "Bridal Velvet Chuda", price: 3500, category: "Bridal", description: "Royal red bridal Chuda set with velvet finish and intricate stone-studded bangles.", image: "https://images.unsplash.com/photo-1599643477877-537ef527ba4d?auto=format&fit=crop&q=80", stock: 20, sizes: ["2.4", "2.6", "2.8"] },
-      { name: "Emerald Drop Heritage Earrings", price: 22000, category: "Heritage", description: "Stunning Zambian emerald drops suspended from a cluster of diamonds. Heritage craftsmanship at its finest.", image: "https://images.unsplash.com/photo-1509109104477-7821a703a1df?auto=format&fit=crop&q=80", stock: 5 },
-      { name: "Men's Gold Signet Ring", price: 18000, category: "Traditional", description: "A bold 22K gold signet ring featuring a traditional Lion crest. Symbol of strength and honor.", image: "https://images.unsplash.com/photo-1603561591411-071c4f723918?auto=format&fit=crop&q=80", stock: 6, sizes: ["20", "22", "24"] },
-      { name: "Kundan Meenakari Bangles", price: 35000, category: "Luxury", description: "Exquisite Kundan work on the outside with vibrant hand-painted Meenakari art on the inside.", image: "https://images.unsplash.com/photo-1611085583273-049887754d7e?auto=format&fit=crop&q=80", stock: 4, sizes: ["2.4", "2.6"] }
-    ];
-
-    setIsLoading(true);
-    try {
-      // Add Products
-      for (const p of sampleProducts) {
-        await addDoc(collection(db, 'products'), p);
-      }
-      
-      // Add Unique Categories
-      const uniqueCats = Array.from(new Set(sampleProducts.map(p => p.category)));
-      for (const cat of uniqueCats) {
-        const q = query(collection(db, 'categories'), where('name', '==', cat));
-        const snap = await getDocs(q);
-        if (snap.empty) {
-          await addDoc(collection(db, 'categories'), { name: cat });
-        }
-      }
-
-      await loadStoreData();
-      alert('12 Luxury Masterpieces and their categories have been added! 💍✨');
-    } catch (e) {
-      console.error("Seed Error:", e);
-      alert('Failed to seed database.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <ShopContext.Provider value={{
@@ -714,7 +673,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
       addToCart, removeFromCart, updateQuantity, toggleWishlist, isInWishlist,
       addAddress, deleteAddress, updateProfile, placeOrder, logout,
       refreshProducts: loadStoreData, addCategory, deleteCategory, adminLogin, googleLogin,
-      applyCoupon, addCoupon, deleteCoupon, coupons, percentageDiscount, fixedDiscount, updateOrderStatus, seedDatabase,
+      applyCoupon, addCoupon, deleteCoupon, coupons, percentageDiscount, fixedDiscount, updateOrderStatus,
       addReview, getProductReviews, trackView, notifyWhenInStock, redeemPoints, shareWishlist,
       saveStoreSettings, saveTaxSettings, saveFlashSale, applyReferralCode,
       bulkDeleteProducts, bulkUpdateProducts,
