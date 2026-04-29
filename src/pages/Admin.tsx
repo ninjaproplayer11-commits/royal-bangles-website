@@ -8,7 +8,7 @@ import { db } from '../lib/firebase';
 import { generateInvoice } from '../utils/invoiceGenerator';
 
 const Admin: React.FC = () => {
-  const { products, categories, refreshProducts, addCategory, deleteCategory, adminUser, logout, coupons, addCoupon, deleteCoupon, updateOrderStatus, storeSettings, taxSettings, flashSale, saveStoreSettings, saveTaxSettings, saveFlashSale, bulkDeleteProducts, bulkUpdateProducts, toggleFeaturedProduct, deleteReview } = useShop();
+  const { products, categories, refreshProducts, addCategory, deleteCategory, adminUser, logout, coupons, addCoupon, deleteCoupon, updateOrderStatus, storeSettings, flashSale, saveStoreSettings, saveFlashSale, bulkDeleteProducts, bulkUpdateProducts, toggleFeaturedProduct, deleteReview } = useShop();
   const [activeTab, setActiveTab] = useState<'list'|'orders'|'analytics'|'coupons'|'categories'|'newsletter'|'form'|'customers'|'settings'|'flashsale'|'returns'|'reviews'>('list');
   const [isEditing, setIsEditing] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Partial<Product>>({});
@@ -32,7 +32,7 @@ const Admin: React.FC = () => {
 
   // Store settings local state
   const [localSettings, setLocalSettings] = useState({ storeName: '', logo: '', phone: '', email: '', address: '', instagram: '', facebook: '', whatsapp: '' });
-  const [localTax, setLocalTax] = useState<Record<string, number>>({});
+
   const [localSale, setLocalSale] = useState({ active: false, discount: 10, label: 'Flash Sale', endTime: '' });
 
   // UI State
@@ -81,9 +81,7 @@ const Admin: React.FC = () => {
   useEffect(() => {
     if (storeSettings && Object.keys(storeSettings).length > 0) setLocalSettings(s => ({ ...s, ...storeSettings }));
   }, [storeSettings]);
-  useEffect(() => {
-    if (taxSettings && Object.keys(taxSettings).length > 0) setLocalTax(taxSettings);
-  }, [taxSettings]);
+
   useEffect(() => {
     if (flashSale) setLocalSale(s => ({ ...s, ...flashSale }));
   }, [flashSale]);
