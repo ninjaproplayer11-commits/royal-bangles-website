@@ -153,19 +153,19 @@ const Checkout: React.FC = () => {
                     <h2 className="text-4xl font-playfair font-bold mb-10 italic text-gold">Shipping Destination</h2>
                     <div className="space-y-6 mb-10">
                       {addresses.map(addr => (
-                        <label key={addr.id} className={`p-8 rounded-[2rem] border cursor-pointer transition-all flex items-center gap-6 ${selectedAddressId === addr.id ? 'bg-gold/5 border-gold shadow-xl shadow-gold/10' : 'bg-[#111] border-white/5 hover:border-white/20'}`}>
+                        <label key={addr.id} className={`p-6 md:p-8 rounded-[2rem] border cursor-pointer transition-all flex items-center gap-4 md:gap-6 ${selectedAddressId === addr.id ? 'bg-gold/5 border-gold shadow-xl shadow-gold/10' : 'bg-[#111] border-white/5 hover:border-white/20'}`}>
                           <input type="radio" checked={selectedAddressId === addr.id} onChange={() => setSelectedAddressId(addr.id)} className="w-5 h-5 accent-gold" />
                           <div className="flex-1">
                             <div className="flex justify-between items-center mb-2">
-                              <h4 className="text-lg font-bold">{addr.name}</h4>
-                              {addr.isDefault && <span className="text-[8px] uppercase tracking-widest bg-gold text-luxury-black px-3 py-1 rounded-full font-bold">Default</span>}
+                              <h4 className="text-base md:text-lg font-bold">{addr.name}</h4>
+                              {addr.isDefault && <span className="text-[8px] uppercase tracking-widest bg-gold text-luxury-black px-2 md:px-3 py-1 rounded-full font-bold">Default</span>}
                             </div>
-                            <p className="text-sm text-white/40">{addr.line1}, {addr.city}, {addr.state} - {addr.pincode}</p>
+                            <p className="text-xs md:text-sm text-white/40">{addr.line1}, {addr.city}, {addr.state} - {addr.pincode}</p>
                             <p className="text-[10px] text-white/20 mt-2">📞 {addr.phone}</p>
                           </div>
                         </label>
                       ))}
-                      <button onClick={() => navigate('/profile')} className="w-full p-8 border-2 border-dashed border-white/10 rounded-[2rem] text-sm font-bold uppercase tracking-widest text-white/40 hover:border-gold/40 hover:text-gold transition-all">+ Add New Address</button>
+                      <button onClick={() => navigate('/profile')} className="w-full p-6 md:p-8 border-2 border-dashed border-white/10 rounded-[2rem] text-sm font-bold uppercase tracking-widest text-white/40 hover:border-gold/40 hover:text-gold transition-all">+ Add New Address</button>
                     </div>
                     <PremiumButton onClick={() => setStep(2)} variant="primary" className="px-12 py-5" disabled={!selectedAddressId}>Continue to Summary</PremiumButton>
                   </motion.div>
@@ -175,17 +175,17 @@ const Checkout: React.FC = () => {
                 {step === 2 && (
                   <motion.div key="step2" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
                     <h2 className="text-4xl font-playfair font-bold mb-10 italic text-gold">Review Selection</h2>
-                    <div className="bg-[#111] rounded-[3rem] border border-white/5 overflow-hidden mb-10">
+                    <div className="bg-[#111] rounded-[2rem] md:rounded-[3rem] border border-white/5 overflow-hidden mb-10">
                       {cartItems.map((item, idx) => (
-                        <div key={`${item.id}-${idx}`} className="p-8 flex gap-8 items-center border-b border-white/5 last:border-0">
-                          <img src={item.image} className="w-24 h-24 object-cover rounded-2xl" alt="" />
+                        <div key={`${item.id}-${idx}`} className="p-6 md:p-8 flex gap-4 md:gap-8 items-center border-b border-white/5 last:border-0">
+                          <img src={item.image} className="w-16 h-16 md:w-24 md:h-24 object-cover rounded-xl md:rounded-2xl" alt="" />
                           <div className="flex-1">
-                            <h4 className="text-xl font-playfair font-bold">{item.name}</h4>
-                            <p className="text-[10px] text-gold font-bold uppercase tracking-widest">
+                            <h4 className="text-lg md:text-xl font-playfair font-bold">{item.name}</h4>
+                            <p className="text-[9px] md:text-[10px] text-gold font-bold uppercase tracking-widest">
                               {item.category} • Qty: {item.quantity} {item.size && `• Size: ${item.size}`}
                             </p>
                           </div>
-                          <p className="text-xl font-bold">₹{item.price * item.quantity}</p>
+                          <p className="text-lg md:text-xl font-bold">₹{item.price * item.quantity}</p>
                         </div>
                       ))}
                     </div>
@@ -217,10 +217,10 @@ const Checkout: React.FC = () => {
                         { id: 'CARD', label: 'Credit / Debit Card', icon: '💳' },
                         { id: 'COD', label: 'Cash on Delivery', icon: '🚚' }
                       ].map(method => (
-                        <label key={method.id} className={`p-8 rounded-[2rem] border cursor-pointer transition-all flex items-center gap-6 ${paymentMethod === method.id ? 'bg-gold/5 border-gold shadow-xl shadow-gold/10' : 'bg-[#111] border-white/5 hover:border-white/20'}`}>
+                        <label key={method.id} className={`p-6 md:p-8 rounded-[2rem] border cursor-pointer transition-all flex items-center gap-4 md:gap-6 ${paymentMethod === method.id ? 'bg-gold/5 border-gold shadow-xl shadow-gold/10' : 'bg-[#111] border-white/5 hover:border-white/20'}`}>
                           <input type="radio" checked={paymentMethod === method.id} onChange={() => setPaymentMethod(method.id as any)} className="w-5 h-5 accent-gold" />
-                          <span className="text-3xl">{method.icon}</span>
-                          <span className="text-lg font-bold">{method.label}</span>
+                          <span className="text-2xl md:text-3xl">{method.icon}</span>
+                          <span className="text-base md:text-lg font-bold">{method.label}</span>
                         </label>
                       ))}
                     </div>

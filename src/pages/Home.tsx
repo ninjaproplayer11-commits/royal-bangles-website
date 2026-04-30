@@ -49,7 +49,7 @@ const Home: React.FC = () => {
   return (
     <div className="bg-luxury-black text-white">
       {/* Hero Section */}
-      <section className="relative h-[110vh] overflow-hidden flex items-center justify-center">
+      <section className="relative h-[100vh] md:h-[110vh] overflow-hidden flex items-center justify-center">
         <motion.div 
           style={{ y: y1, scale, opacity }}
           className="absolute inset-0 z-0"
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
             <span className="text-gold text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] mb-6 block">
               The Art of Fine Craftsmanship
             </span>
-            <h1 className="text-6xl md:text-9xl font-playfair font-bold mb-8 leading-none">
+            <h1 className="text-5xl sm:text-6xl md:text-9xl font-playfair font-bold mb-8 leading-none">
               Timeless <br />
               <span className="text-gold italic">Elegance</span>
             </h1>
@@ -105,7 +105,7 @@ const Home: React.FC = () => {
       {/* Featured Occasions */}
       <section className="py-32 px-6">
         <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 gap-8">
             <div className="max-w-2xl">
               <span className="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-4 block">Categories</span>
               <h2 className="text-4xl md:text-6xl font-playfair font-bold">Shop by Occasion</h2>
@@ -126,7 +126,7 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative h-[500px] overflow-hidden cursor-pointer"
+                className="group relative h-[350px] md:h-[500px] overflow-hidden cursor-pointer rounded-2xl md:rounded-none"
               >
                 <img 
                   src={occ.image} 
@@ -205,12 +205,12 @@ const Home: React.FC = () => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="gold-border-gradient p-12 md:p-20 relative overflow-hidden text-center"
+            className="gold-border-gradient p-8 md:p-20 relative overflow-hidden text-center rounded-[2.5rem]"
           >
             <div className="relative z-10">
               <span className="text-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-6 block animate-pulse">Limited Edition Release</span>
-              <h2 className="text-4xl md:text-7xl font-playfair font-bold mb-8">The Royal Bridal Edit</h2>
-              <p className="text-white/70 max-w-2xl mx-auto mb-12 font-poppins">
+              <h2 className="text-3xl sm:text-4xl md:text-7xl font-playfair font-bold mb-8">The Royal Bridal Edit</h2>
+              <p className="text-white/70 max-w-2xl mx-auto mb-12 font-poppins text-sm md:text-base">
                 Experience the grandeur of traditional Indian jewelry. Get priority access to our upcoming collection.
               </p>
               <div className="flex justify-center gap-4 flex-wrap">

@@ -105,7 +105,7 @@ const LuxuryNavbar: React.FC = () => {
         </nav>
 
         {/* Action Icons */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 md:gap-8">
           
           {/* Live Search Trigger */}
           <div className="relative" ref={searchRef}>

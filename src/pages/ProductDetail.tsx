@@ -49,9 +49,9 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div className="bg-luxury-black text-white min-h-screen pt-32 font-poppins overflow-hidden">
-      <div className="container mx-auto px-6 pb-24">
+      <div className="container mx-auto px-6 pb-32 lg:pb-24">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
           
           {/* Left: Gallery Section */}
           <div className="space-y-6">
@@ -73,13 +73,13 @@ const ProductDetail: React.FC = () => {
                 <>
                   <button
                     onClick={() => setActiveImage(i => (i - 1 + gallery.length) % gallery.length)}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-gold hover:text-luxury-black transition-all z-10"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-gold hover:text-luxury-black transition-all z-10"
                   >
                     ‹
                   </button>
                   <button
                     onClick={() => setActiveImage(i => (i + 1) % gallery.length)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-gold hover:text-luxury-black transition-all z-10"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center text-white hover:bg-gold hover:text-luxury-black transition-all z-10"
                   >
                     ›
                   </button>
@@ -117,7 +117,7 @@ const ProductDetail: React.FC = () => {
           <div className="flex flex-col">
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
               <p className="text-[10px] uppercase tracking-[0.5em] text-gold font-bold mb-4">{product.category}</p>
-              <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-6 italic leading-tight text-shadow-gold">{product.name}</h1>
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-playfair font-bold mb-6 italic leading-tight text-shadow-gold">{product.name}</h1>
               
               <div className="flex items-center gap-6 mb-10">
                 <div className="flex text-gold">
@@ -292,7 +292,7 @@ const ProductDetail: React.FC = () => {
                 </div>
               )}
               {activeTab === 'specifications' && (
-                <div className="grid grid-cols-2 gap-8 bg-white/5 p-10 rounded-[3rem] border border-white/5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white/5 p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] border border-white/5">
                   <div>
                     <p className="text-[9px] text-white/40 uppercase tracking-widest mb-1">Metal Type</p>
                     <p className="text-sm font-bold tracking-wider">22K Gold Plated Brass</p>

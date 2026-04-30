@@ -34,7 +34,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       <div className="relative aspect-[3/4] overflow-hidden rounded-[2.5rem] bg-[#111] border border-white/5 transition-all duration-500 group-hover:border-gold/30 group-hover:shadow-2xl group-hover:shadow-gold/10">
         
         {/* Luxury Badges */}
-        <div className="absolute top-6 left-6 z-20 flex flex-col gap-2">
+        <div className="absolute top-4 left-4 md:top-6 md:left-6 z-20 flex flex-col gap-2">
           {isNew && (
             <span className="bg-gold text-luxury-black text-[9px] font-bold uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-lg shadow-gold/20">
               New Arrival
@@ -58,7 +58,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             e.preventDefault();
             toggleWishlist(id);
           }}
-          className="absolute top-6 right-6 z-20 p-4 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-white hover:text-gold transition-all duration-300 active:scale-90"
+          className="absolute top-4 right-4 md:top-6 md:right-6 z-20 p-3 md:p-4 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-white hover:text-gold transition-all duration-300 active:scale-90"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           />
           
           {/* Elegant Hover Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8 gap-3">
+          <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-4 md:p-8 gap-3">
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

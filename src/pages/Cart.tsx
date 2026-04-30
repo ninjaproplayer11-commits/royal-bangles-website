@@ -48,10 +48,10 @@ const Cart: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, y: 30 }} 
             animate={{ opacity: 1, y: 0 }} 
-            className="mb-20 text-center"
+            className="mb-12 md:mb-20 text-center"
           >
             <p className="text-gold text-[10px] font-bold uppercase tracking-[0.6em] mb-6 block">Your Curation</p>
-            <h1 className="text-6xl md:text-8xl font-playfair font-bold italic text-shadow-gold">Shopping Bag</h1>
+            <h1 className="text-5xl md:text-8xl font-playfair font-bold italic text-shadow-gold">Shopping Bag</h1>
           </motion.div>
 
           {cartItems.length === 0 ? (
@@ -79,7 +79,7 @@ const Cart: React.FC = () => {
                       initial={{ opacity: 0, x: -20 }} 
                       animate={{ opacity: 1, x: 0 }} 
                       exit={{ opacity: 0, scale: 0.95 }} 
-                      className="group relative flex flex-col md:flex-row gap-10 p-10 bg-white/5 border border-white/5 rounded-[3rem] hover:border-gold/20 transition-all duration-500"
+                      className="group relative flex flex-col md:flex-row gap-8 md:gap-10 p-6 md:p-10 bg-white/5 border border-white/5 rounded-[2.5rem] md:rounded-[3rem] hover:border-gold/20 transition-all duration-500"
                     >
                       <div className="w-full md:w-56 aspect-square overflow-hidden rounded-[2rem] bg-[#111] border border-white/5 shadow-2xl">
                         <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110" />
@@ -111,18 +111,18 @@ const Cart: React.FC = () => {
                           <p className="text-3xl font-playfair font-bold text-gold italic">₹{item.price}</p>
                         </div>
 
-                        <div className="flex justify-between items-center mt-10">
-                          <div className="flex items-center bg-white/5 border border-white/10 rounded-2xl px-6 py-3">
+                        <div className="flex justify-between items-center mt-8 md:mt-10">
+                          <div className="flex items-center bg-white/5 border border-white/10 rounded-2xl px-4 md:px-6 py-2 md:py-3">
                             <button 
                               onClick={() => updateQuantity(item.id, item.quantity - 1, item.size)} 
-                              className="text-gold text-2xl px-4 hover:scale-125 transition-transform"
+                              className="text-gold text-2xl px-2 md:px-4 hover:scale-125 transition-transform"
                             >
                               −
                             </button>
-                            <span className="mx-8 text-sm font-bold w-6 text-center">{item.quantity}</span>
+                            <span className="mx-4 md:mx-8 text-sm font-bold w-6 text-center">{item.quantity}</span>
                             <button 
                               onClick={() => updateQuantity(item.id, item.quantity + 1, item.size)} 
-                              className="text-gold text-2xl px-4 hover:scale-125 transition-transform"
+                              className="text-gold text-2xl px-2 md:px-4 hover:scale-125 transition-transform"
                             >
                               +
                             </button>
@@ -140,8 +140,8 @@ const Cart: React.FC = () => {
 
               {/* Order Summary Sidebar */}
               <div className="lg:col-span-4 sticky top-32">
-                <div className="bg-[#111] p-12 rounded-[3.5rem] border border-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]">
-                  <h3 className="text-3xl font-playfair font-bold mb-10 italic border-b border-white/5 pb-8">Order Summary</h3>
+                <div className="bg-[#111] p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)]">
+                  <h3 className="text-2xl md:text-3xl font-playfair font-bold mb-8 md:mb-10 italic border-b border-white/5 pb-6 md:pb-8">Order Summary</h3>
                   
                   {/* Coupon Box */}
                   <div className="mb-12 space-y-4">

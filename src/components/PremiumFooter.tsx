@@ -26,7 +26,7 @@ const PremiumFooter: React.FC = () => {
   return (
     <footer className="bg-luxury-black border-t border-white/5 pt-24 pb-12 px-6">
       <div className="container mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 mb-20">
           {/* Brand Info */}
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="inline-block mb-8">
